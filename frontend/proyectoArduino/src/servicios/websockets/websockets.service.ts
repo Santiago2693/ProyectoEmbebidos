@@ -19,20 +19,10 @@ export class WebsocketsService {
     return this.socket.fromEvent('escucharEventoSaludar');
 
   }
+  
 
-  ejecutarEventoEnviarListo(salaId: string, posicionBarcosEnemigos: number[]) {
-    // Emitimos un evento
-    const resp = this.socket.emit(
-      'enviarListo', {
-
-        posicionBarcosEnemigos: posicionBarcosEnemigos,
-        idSala: salaId
-
-      });
-  }
-
-  escucharEnviarTemperaturaYPresion() {
-    return this.socket.fromEvent('escucharEnviarTemperaturaYPresion');
+  escucharEventoTemperaturaYPresion() {
+    return this.socket.fromEvent('escucharEventoTemperaturaYPresion');
 
   }
 
