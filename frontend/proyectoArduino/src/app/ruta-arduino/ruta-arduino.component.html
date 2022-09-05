@@ -1,1 +1,121 @@
 <button type="button" class="btn btn-success" (click)="saludar()">Saludar</button>
+<div class="contenedor">
+  <div id="divWeatherMain">
+    <div class="weatherWidgetRow">
+      <i class="fas fa-3x fa-sun sun"></i>
+    </div>
+
+    <div class="weatherWidgetRow cloudDiv">
+      <i class="fas fa-cloud fa-3x cloud"></i>
+    </div>
+    <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">{{44}}°</div>
+    <div class="weatherWidgetRow" style="font-size: 18px;">{{46}}° / {{48}}°</div>
+    <div class="weatherWidgetRow" style="font-size: 12px;">{{fecha|date: 'fullDate'}}</div>
+    <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">QUITO</div>
+    <div class="weatherWidgetRow" style="font-size: 18px;">Humedad: {{20}}%</div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+    <div
+      *ngIf="formGroup1"
+      class="contenedor-formulario">
+
+      <form [formGroup]="formGroup1">
+
+        <!-- Mensaje -->
+        <div>
+          <label class="form-label"
+                 for="mensajearForm">
+            Mensaje:
+          </label>
+          <input aria-describedby="buscarFormHelp"
+                 class="form-control"
+                 formControlName="mensaje"
+                 id="mensajearForm"
+                 type="text">
+          <div class="form-text"
+               id="buscarFormHelp">
+            Ingrese el mensaje que desea enviar.
+          </div>
+          <div *ngIf="formGroup1.get('mensaje')">
+            <div *ngIf="
+             formGroup1.get('mensaje')?.invalid &&
+             formGroup1.get('mensaje')?.touched &&
+             formGroup1.get('mensaje')?.dirty
+                    "
+                 class="alert alert-danger" role="alert">
+            <span *ngIf="formGroup1.get('mensaje')?.hasError('required')">
+              Mensaje requerido
+            </span>
+              <span *ngIf="formGroup1.get('mensaje')?.hasError('pattern')">
+              El mensaje no puede tener caracteres especiales
+            </span>
+              <span *ngIf="formGroup1.get('mensaje')?.hasError('maxlength')">
+              El mensaje no puede tener más de 30 caracteres
+            </span>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- Boton -->
+        <div>
+          <button [disabled]="formGroup1.invalid" (click)="enviarMensaje()" class="btn btn-success bonton-enviar"
+                  type="submit">
+            Buscar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+    <div
+      *ngIf="formGroup2"
+      class="contenedor-formulario"
+    >
+
+      <form [formGroup]="formGroup2">
+
+        <!-- Color -->
+        <div>
+          <label class="form-label"
+                 for="colorForm">
+            Color:
+          </label>
+          <input aria-describedby="colorFormHelp"
+                 class="form-control"
+                 formControlName="color"
+                 id="colorForm"
+                 type="text">
+          <div class="form-text"
+               id="colorFormHelp">
+            Ingrese el mensaje que desea enviar.
+          </div>
+          <div *ngIf="formGroup2.get('color')">
+            <div *ngIf="
+             formGroup2.get('color')?.invalid &&
+             formGroup2.get('color')?.touched &&
+             formGroup2.get('color')?.dirty
+                    "
+                 class="alert alert-danger" role="alert">
+            <span *ngIf="formGroup2.get('color')?.hasError('required')">
+              Mensaje requerido
+            </span>
+
+
+            </div>
+
+          </div>
+        </div>
+        <!-- Boton -->
+        <div>
+          <button [disabled]="formGroup2.invalid" (click)="enviarMensaje()" class="btn btn-success bonton-enviar"
+                  type="submit">
+            Buscar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
