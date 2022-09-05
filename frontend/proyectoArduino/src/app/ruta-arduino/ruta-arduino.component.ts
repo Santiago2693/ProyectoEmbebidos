@@ -51,7 +51,7 @@ export class RutaArduinoComponent implements OnInit {
         }
       );
   }
-
+//envia el mensaje por un evento de websocket
   enviarMensaje() {
     if (this.formGroup1) {
       const mensaje1 = this.formGroup1.get('mensaje');
@@ -81,8 +81,9 @@ export class RutaArduinoComponent implements OnInit {
       );
   }
 
-
+//crea subscripciones para escuhar los eventos del websocket
   logicaConexionArduino() {
+    //desuscribe los evventos anteriores existentes
     this.desSuscribirse();
     const respEscucharEventoSaludar = this.websocketsService.escucharEventoSaludar()
       .subscribe(
@@ -96,10 +97,12 @@ export class RutaArduinoComponent implements OnInit {
           }
         }
       );
+    //escucha el envio de temperatura y humedad
     const respEscucharEventoTemperaturaYHumedad = this.websocketsService.escucharEventoTemperaturaYHumedad()
       .subscribe(
         {
           next: (data) => {
+            //se asigna los valores de temperatura y humedad para mostrar en pantalla
             const informacion=data as {temperatura:number, humedad:number};
             if(informacion.temperatura){
               this.temperatura = informacion.temperatura;
@@ -129,7 +132,7 @@ export class RutaArduinoComponent implements OnInit {
     this.websocketsService.ejecutarEventoSaludar();
 
   }
-
+  //envia el color por un evento de websocket
   enviarColor() {
     if (this.formGroup2) {
       const color1 = this.formGroup2.get('color');

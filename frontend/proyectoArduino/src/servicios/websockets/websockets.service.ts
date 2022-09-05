@@ -26,7 +26,7 @@ export class WebsocketsService {
 
   }
 
-  ejecutarEventoEnviarRGB(color:string) {
+  ejecutarEventoEnviarRGB(color: string) {
     // Emitimos un evento
     const resp = this.socket.emit(
       'enviarRGB', {
