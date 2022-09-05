@@ -7,13 +7,15 @@
 
 #include <WebSocketsClient.h>
 #include <SocketIOclient.h>
-
+#include <typeinfo>
 #include <Hash.h>
+#include<DHT.h>
+#define USE_SERIAL Serial
 
 ESP8266WiFiMulti WiFiMulti;
 SocketIOclient socketIO;
+DHT sensorTempH(5,DHT22);
 
-#define USE_SERIAL Serial
 
 void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length) {
   switch (type) {
@@ -27,7 +29,9 @@ void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length)
       socketIO.send(sIOtype_CONNECT, "/");
       break;
     case sIOtype_EVENT:
-      USE_SERIAL.printf("[IOc]NNNNNNNNNN get event: %s\n", payload);
+      //USE_SERIAL.printf("[\"escucharEventoRGB\",{\"r\":255,\"g\":255,\"b\":255}]");
+      //USE_SERIAL.printf("Mensaje recibido con tamano %d y string %s\n", length, (byte *)payload);
+      USE_SERIAL.write((byte*)payload, length);
       break;
     case sIOtype_ACK:
       USE_SERIAL.printf("[IOc] get ack: %u\n", length);
@@ -50,7 +54,8 @@ void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length)
 
 void setup() {
   // USE_SERIAL.begin(921600);
-  USE_SERIAL.begin(115200);
+  USE_SERIAL.begin(9600);
+  
 
   //Serial.setDebugOutput(true);
   USE_SERIAL.setDebugOutput(true);
@@ -85,39 +90,51 @@ void setup() {
 
   // event handler
   socketIO.onEvent(socketIOEvent);
+  sensorTempH.begin();
 }
 
 unsigned long messageTimestamp = 0;
 void loop() {
-  /*
-  Prueba comunicacion serial
-  =============================
-  */
-  if(USE_SERIAL.available()){
-    USE_SERIAL.println((char)USE_SERIAL.read());
-  }
+  
 
   /*===============*/
   socketIO.loop();
 
   uint64_t now = millis();
 
-  if (now - messageTimestamp > 2000) {
+  if (now - messageTimestamp > 5000) {
     messageTimestamp = now;
+    sensarTemperatura();
+    
+  }
+}
 
-    // creat JSON message for Socket.IO (event)
+void sensarTemperatura(){
+// Leemos la humedad relativa
+  float h = sensorTempH.readHumidity();
+  // Leemos la temperatura en grados centígrados (por defecto)
+  float t = sensorTempH.readTemperature();
+   // Comprobamos si ha habido algún error en la lectura
+  if (isnan(h) || isnan(t)) {
+    return;
+  }
+  notificarTemperatura(t,h);
+   
+}
+
+void notificarTemperatura(float temperatura, float humedad){
+// creat JSON message for Socket.IO (event)
     DynamicJsonDocument doc(1024);
     JsonArray array = doc.to<JsonArray>();
 
     // add evnet name
     // Hint: socket.on('event_name', ....
-    array.add("saludar");
+    array.add("enviarTemperaturaYHumedad");
 
     // add payload (parameters) for the event
     JsonObject param1 = array.createNestedObject();
-    param1["now"] = "Saludar desde modulo wifi";
-    JsonObject param2 = array.createNestedObject();
-    param2["then"] = "Saludar desde modulo wifi parametro 2";
+    param1["temperatura"] = temperatura;
+    param1["humedad"] = humedad;
 
     // JSON to String (serializion)
     String output;
@@ -125,8 +142,4 @@ void loop() {
 
     // Send event
     socketIO.sendEVENT(output);
-
-    // Print JSON for debugging
-    //USE_SERIAL.println(output);
-  }
 }

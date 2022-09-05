@@ -39,7 +39,7 @@ export class RutaArduinoComponent implements OnInit {
           }
         }
       );
-    const respEscucharEventoTemperaturaYPresion=this.websocketsService.escucharEventoTemperaturaYPresion()
+    const respEscucharEventoTemperaturaYHumedad=this.websocketsService.escucharEventoTemperaturaYHumedad()
       .subscribe(
         {
           next:(data)=>{
@@ -65,5 +65,8 @@ export class RutaArduinoComponent implements OnInit {
 
   saludar() {
     this.websocketsService.ejecutarEventoSaludar();
+    this.websocketsService.ejecutarEventoEnviarRGB(125,125,125);
+    this.websocketsService.ejecutarEventoEnviarMensaje("Probando el saludo");
+
   }
 }

@@ -19,10 +19,10 @@ export class WebsocketsService {
     return this.socket.fromEvent('escucharEventoSaludar');
 
   }
-  
 
-  escucharEventoTemperaturaYPresion() {
-    return this.socket.fromEvent('escucharEventoTemperaturaYPresion');
+
+  escucharEventoTemperaturaYHumedad() {
+    return this.socket.fromEvent('escucharEventoTemperaturaYHumedad');
 
   }
 
