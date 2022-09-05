@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from 'rxjs';
 import {WebsocketsService} from 'src/servicios/websockets/websockets.service';
 
@@ -11,42 +12,98 @@ export class RutaArduinoComponent implements OnInit {
   arregloSubscripciones: Subscription[] = [];
   temperatura = 0;
   presion = 0;
-  r = 0;
-  g = 0;
-  b = 0;
+  color = "#1976D2"
+
   mensaje = "";
+  fecha = new Date();
+  formGroup1?: FormGroup;
+  formGroup2?: FormGroup;
+
+
 
   constructor(
     public readonly websocketsService: WebsocketsService,
+    private readonly formBuilder: FormBuilder,
+
   ) {
   }
 
   ngOnInit(): void {
     this.logicaConexionArduino();
+    this.prepararFormularioMensaje();
+    this.prepararFormularioColor();
   }
+
+  prepararFormularioColor() {
+    this.formGroup2 = this.formBuilder
+      .group(
+        {
+          color: new FormControl(
+            {
+              value: this.color,
+              disabled: false
+            },
+            [
+              Validators.required, // min, max, minLength maxLength, email, pattern
+
+            ]
+          )
+        }
+      );
+  }
+
+  enviarMensaje() {
+    if (this.formGroup1) {
+      const mensaje1 = this.formGroup1.get('mensaje');
+      if (mensaje1) {
+        this.mensaje = mensaje1.value;
+        this.websocketsService.ejecutarEventoEnviarMensaje(this.mensaje)
+      }
+    }
+  }
+
+  private prepararFormularioMensaje() {
+    this.formGroup1 = this.formBuilder
+      .group(
+        {
+          mensaje: new FormControl(
+            {
+              value: this.mensaje,
+              disabled: false
+            },
+            [
+              Validators.required, // min, max, minLength maxLength, email, pattern
+              Validators.maxLength(13),
+              Validators.pattern("[A-Za-z0-9]+"),
+            ]
+          )
+        }
+      );
+  }
+
 
   logicaConexionArduino() {
     this.desSuscribirse();
-    const respEscucharEventoSaludar=this.websocketsService.escucharEventoSaludar()
+    const respEscucharEventoSaludar = this.websocketsService.escucharEventoSaludar()
       .subscribe(
         {
-          next:(data)=>{
-            const informacion=data;
+          next: (data) => {
+            const informacion = data;
             console.log(data);
           },
-          error:(error)=>{
+          error: (error) => {
             console.error({error});
           }
         }
       );
-    const respEscucharEventoTemperaturaYHumedad=this.websocketsService.escucharEventoTemperaturaYHumedad()
+    const respEscucharEventoTemperaturaYHumedad = this.websocketsService.escucharEventoTemperaturaYHumedad()
       .subscribe(
         {
-          next:(data)=>{
-            const informacion=data;
+          next: (data) => {
+            const informacion = data;
             console.log(data);
           },
-          error:(error)=>{
+          error: (error) => {
             console.error({error});
           }
         }
@@ -65,8 +122,17 @@ export class RutaArduinoComponent implements OnInit {
 
   saludar() {
     this.websocketsService.ejecutarEventoSaludar();
-    this.websocketsService.ejecutarEventoEnviarRGB(125,125,125);
-    this.websocketsService.ejecutarEventoEnviarMensaje("Probando el saludo");
 
+  }
+
+  enviarColor() {
+    if (this.formGroup2) {
+      const color1 = this.formGroup2.get('color');
+      if (color1) {
+        this.color = color1.value;
+        this.websocketsService.ejecutarEventoEnviarRGB(this.color)
+
+      }
+    }
   }
 }
