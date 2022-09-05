@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="541c919d-4833-4ecc-b935-f60ed2dddd65" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/proyectoArduino/src/app/ruta-arduino/ruta-arduino.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/proyectoArduino/src/app/ruta-arduino/ruta-arduino.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/proyectoArduino/src/app/ruta-arduino/ruta-arduino.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/proyectoArduino/src/app/ruta-arduino/ruta-arduino.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="541c919d-4833-4ecc-b935-f60ed2dddd65" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,19 +25,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ts.external.directory.path": "D:\\Repositorios\\Publico\\ProyectoEmbebidos\\backend\\proyecto-arduino\\node_modules\\typescript\\lib"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gueva\Documents\github\ProyectoEmbebidos\backend\proyecto-arduino" />
@@ -78,6 +66,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
