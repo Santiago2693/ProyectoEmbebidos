@@ -11,7 +11,7 @@ import {WebsocketsService} from 'src/servicios/websockets/websockets.service';
 export class RutaArduinoComponent implements OnInit {
   arregloSubscripciones: Subscription[] = [];
   temperatura = 0;
-  presion = 0;
+  humedad = 3;
   color = "#1976D2"
 
   mensaje = "";
@@ -100,8 +100,13 @@ export class RutaArduinoComponent implements OnInit {
       .subscribe(
         {
           next: (data) => {
-            const informacion = data;
-            console.log(data);
+            const informacion=data as {temperatura:number, humedad:number};
+            if(informacion.temperatura){
+              this.temperatura = informacion.temperatura;
+            }
+            if(informacion.humedad){
+              this.humedad = informacion.humedad;
+            }
           },
           error: (error) => {
             console.error({error});

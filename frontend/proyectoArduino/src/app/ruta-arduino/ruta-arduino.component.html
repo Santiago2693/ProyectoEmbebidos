@@ -10,11 +10,11 @@
     <div class="weatherWidgetRow cloudDiv">
       <i class="fas fa-cloud fa-3x cloud"></i>
     </div>
-    <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">{{44}}°</div>
-    <div class="weatherWidgetRow" style="font-size: 18px;">{{46}}° / {{48}}°</div>
+    <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">{{temperatura.toFixed(2)}} C°</div>
+    <div class="weatherWidgetRow" style="font-size: 18px;">{{(temperatura-0.5).toFixed(2)}} C° / {{(temperatura+0.5).toFixed(2)}} C°</div>
     <div class="weatherWidgetRow" style="font-size: 12px;">{{fecha|date: 'fullDate'}}</div>
-    <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">QUITO</div>
-    <div class="weatherWidgetRow" style="font-size: 18px;">Humedad: {{20}}%</div>
+    <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">Quito</div>
+    <div class="weatherWidgetRow" style="font-size: 18px;">Humedad: {{humedad.toFixed(2)}}%</div>
   </div>
 </div>
 <div class="row">
