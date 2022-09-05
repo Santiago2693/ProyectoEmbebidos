@@ -26,14 +26,11 @@ export class WebsocketsService {
 
   }
 
-  ejecutarEventoEnviarRGB(r: number, g: number, b: number) {
+  ejecutarEventoEnviarRGB(color:string) {
     // Emitimos un evento
     const resp = this.socket.emit(
       'enviarRGB', {
-        r: r,
-        g: g,
-        b: b
-
+        color: color
       });
   }
 

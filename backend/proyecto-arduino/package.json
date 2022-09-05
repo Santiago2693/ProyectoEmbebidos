@@ -2,6 +2,7 @@
   "name": "proyecto-arduino",
   "version": "0.0.1",
   "description": "",
+
   "author": "",
   "private": true,
   "license": "UNLICENSED",
@@ -26,6 +27,8 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-socket.io": "^9.0.11",
     "@nestjs/websockets": "^9.0.11",
+    "fix-path": "^3.0.0",
+    "hex-rgb": "^5.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",

@@ -1,4 +1,6 @@
-<button type="button" class="btn btn-success" (click)="saludar()">Saludar</button>
+<div>
+  <h1>Websockets con arduino</h1>
+</div>
 <div class="contenedor">
   <div id="divWeatherMain">
     <div class="weatherWidgetRow">
@@ -63,7 +65,7 @@
         <div>
           <button [disabled]="formGroup1.invalid" (click)="enviarMensaje()" class="btn btn-success bonton-enviar"
                   type="submit">
-            Buscar
+            Enviar
           </button>
         </div>
       </form>
@@ -83,11 +85,11 @@
                  for="colorForm">
             Color:
           </label>
-          <input aria-describedby="colorFormHelp"
-                 class="form-control"
-                 formControlName="color"
-                 id="colorForm"
-                 type="text">
+          <p-colorPicker  aria-describedby="colorFormHelp"
+                         class="form-control"
+                         formControlName="color"
+                         id="colorForm" ></p-colorPicker>
+
           <div class="form-text"
                id="colorFormHelp">
             Ingrese el mensaje que desea enviar.
@@ -100,7 +102,7 @@
                     "
                  class="alert alert-danger" role="alert">
             <span *ngIf="formGroup2.get('color')?.hasError('required')">
-              Mensaje requerido
+              Color requerido
             </span>
 
 
@@ -110,9 +112,9 @@
         </div>
         <!-- Boton -->
         <div>
-          <button [disabled]="formGroup2.invalid" (click)="enviarMensaje()" class="btn btn-success bonton-enviar"
+          <button [disabled]="formGroup2.invalid" (click)="enviarColor()" class="btn btn-success bonton-enviar"
                   type="submit">
-            Buscar
+            Enviar
           </button>
         </div>
       </form>

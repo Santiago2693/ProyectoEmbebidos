@@ -11,6 +11,7 @@ import {LOCALE_ID} from '@angular/core';
 import {CommonModule, registerLocaleData} from "@angular/common";
 import localeEs from "@angular/common/locales/es";
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ColorPickerModule} from 'primeng/colorpicker';
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -23,6 +24,7 @@ registerLocaleData(localeEs, 'es');
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    ColorPickerModule,
     SocketIoModule.forRoot({
       url: 'ws://localhost:8080',
       options: {

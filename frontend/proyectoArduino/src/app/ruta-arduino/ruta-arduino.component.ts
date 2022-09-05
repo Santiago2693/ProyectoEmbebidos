@@ -12,10 +12,8 @@ export class RutaArduinoComponent implements OnInit {
   arregloSubscripciones: Subscription[] = [];
   temperatura = 0;
   presion = 0;
-  r = 0;
-  g = 0;
-  b = 0;
-  color = `#ffdd2d`;
+  color = "#1976D2"
+
   mensaje = "";
   fecha = new Date();
   formGroup1?: FormGroup;
@@ -59,7 +57,7 @@ export class RutaArduinoComponent implements OnInit {
       const mensaje1 = this.formGroup1.get('mensaje');
       if (mensaje1) {
         this.mensaje = mensaje1.value;
-        console.log(this.mensaje)
+        this.websocketsService.ejecutarEventoEnviarMensaje(this.mensaje)
       }
     }
   }
@@ -75,7 +73,7 @@ export class RutaArduinoComponent implements OnInit {
             },
             [
               Validators.required, // min, max, minLength maxLength, email, pattern
-              Validators.maxLength(30),
+              Validators.maxLength(13),
               Validators.pattern("[A-Za-z0-9]+"),
             ]
           )
@@ -124,8 +122,17 @@ export class RutaArduinoComponent implements OnInit {
 
   saludar() {
     this.websocketsService.ejecutarEventoSaludar();
-    this.websocketsService.ejecutarEventoEnviarRGB(125, 125, 125);
-    this.websocketsService.ejecutarEventoEnviarMensaje("Probando el saludo");
 
+  }
+
+  enviarColor() {
+    if (this.formGroup2) {
+      const color1 = this.formGroup2.get('color');
+      if (color1) {
+        this.color = color1.value;
+        this.websocketsService.ejecutarEventoEnviarRGB(this.color)
+
+      }
+    }
   }
 }
