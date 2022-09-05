@@ -13,7 +13,7 @@
 ESP8266WiFiMulti WiFiMulti;
 SocketIOclient socketIO;
 
-#define USE_SERIAL Serial1
+#define USE_SERIAL Serial
 
 void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length) {
   switch (type) {
@@ -27,7 +27,7 @@ void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length)
       socketIO.send(sIOtype_CONNECT, "/");
       break;
     case sIOtype_EVENT:
-      USE_SERIAL.printf("[IOc] get event: %s\n", payload);
+      USE_SERIAL.printf("[IOc]NNNNNNNNNN get event: %s\n", payload);
       break;
     case sIOtype_ACK:
       USE_SERIAL.printf("[IOc] get ack: %u\n", length);
@@ -70,7 +70,7 @@ void setup() {
     WiFi.softAPdisconnect(true);
   }
 
-  WiFiMulti.addAP("SSID", "passpasspass");
+  WiFiMulti.addAP("NETLIFE-MUNOZ", "1723171714");
 
   //WiFi.disconnect();
   while (WiFiMulti.run() != WL_CONNECTED) {
@@ -81,7 +81,7 @@ void setup() {
   USE_SERIAL.printf("[SETUP] WiFi Connected %s\n", ip.c_str());
 
   // server address, port and URL
-  socketIO.begin("10.11.100.100", 8080);
+  socketIO.begin("192.168.100.238", 8080, "/socket.io/?EIO=4");
 
   // event handler
   socketIO.onEvent(socketIOEvent);
@@ -102,11 +102,13 @@ void loop() {
 
     // add evnet name
     // Hint: socket.on('event_name', ....
-    array.add("escucharEventoSaludar");
+    array.add("saludar");
 
     // add payload (parameters) for the event
     JsonObject param1 = array.createNestedObject();
-    param1["now"] = (uint32_t) "Saludar";
+    param1["now"] = "Saludar desde modulo wifi";
+    JsonObject param2 = array.createNestedObject();
+    param2["then"] = "Saludar desde modulo wifi parametro 2";
 
     // JSON to String (serializion)
     String output;
@@ -116,6 +118,6 @@ void loop() {
     socketIO.sendEVENT(output);
 
     // Print JSON for debugging
-    USE_SERIAL.println(output);
+    //USE_SERIAL.println(output);
   }
 }
