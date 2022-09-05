@@ -1,5 +1,4 @@
 import {ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway} from "@nestjs/websockets";
-import hexRgb from "hex-rgb";
 import {Socket} from 'socket.io';
 
 @WebSocketGateway(
@@ -9,7 +8,10 @@ import {Socket} from 'socket.io';
             origin: '*',
         }
     })
+
+
 export class EventosGateway {
+
     @SubscribeMessage('saludar')
     devolverHola(
         @ConnectedSocket()
@@ -51,17 +53,41 @@ export class EventosGateway {
     ) {
         const rExp: RegExp = /#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
         if (!rExp.test(message.color)) {
-            message.color="#ff0000";
+            message.color = "#ff0000";
         }
-        console.log(hexRgb(message.color));
+        var red = 255;
+        var green = 0;
+        var blue = 0;
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(message.color);
+        if (result) {
+            red = parseInt(result[1], 16);
+            green = parseInt(result[2], 16);
+            blue = parseInt(result[3], 16);
+        }
+        red = Math.abs(255 - red);
+        green = Math.abs(255 - green);
+        blue = Math.abs(255 - blue);
+        var r = red.toString();
+        var g = green.toString();
+        var b = blue.toString();
+        if (r.length != 3) {
+            r = '0'.repeat(3 - r.length) + r;
+        }
+        if (g.length != 3) {
+            g = '0'.repeat(3 - g.length) + g;
+        }
+        if (b.length != 3) {
+            b = '0'.repeat(3 - b.length) + b;
+        }
+
 
         socket.broadcast
             .emit(
                 'escucharEventoRGB',
                 {
-                    r: 4,
-                    g: 4,
-                    b: 5
+                    r: r,
+                    g: g,
+                    b: b
                 });
         return 'ok';
     }
