@@ -89,6 +89,15 @@ void setup() {
 
 unsigned long messageTimestamp = 0;
 void loop() {
+  /*
+  Prueba comunicacion serial
+  =============================
+  */
+  if(USE_SERIAL.available()){
+    USE_SERIAL.println((char)USE_SERIAL.read());
+  }
+
+  /*===============*/
   socketIO.loop();
 
   uint64_t now = millis();
