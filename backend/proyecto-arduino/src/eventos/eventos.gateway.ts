@@ -99,11 +99,12 @@ export class EventosGateway {
         @ConnectedSocket()
             socket: Socket
     ) {
-        if (message.mensaje.length > 13) {
-            message.mensaje = message.mensaje.substr(0, 13)
+        var maxCaracteres = 19;
+        if (message.mensaje.length > maxCaracteres) {
+            message.mensaje = message.mensaje.substr(0, maxCaracteres)
         } else {
             let longitud = message.mensaje.length;
-            message.mensaje = message.mensaje + ' '.repeat(13 - longitud);
+            message.mensaje = message.mensaje + ' '.repeat(maxCaracteres - longitud);
 
         }
 
