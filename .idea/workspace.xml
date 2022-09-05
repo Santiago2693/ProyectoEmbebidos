@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="541c919d-4833-4ecc-b935-f60ed2dddd65" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/proyecto-arduino/src/eventos/eventos.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/proyecto-arduino/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/proyecto-arduino/src/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/proyecto-arduino/src/eventos/eventos.gateway.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/proyecto-arduino/src/eventos/eventos.gateway.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/proyectoArduino/src/app/ruta-arduino/ruta-arduino.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/proyectoArduino/src/app/ruta-arduino/ruta-arduino.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/proyectoArduino/src/servicios/websockets/websockets.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/proyectoArduino/src/servicios/websockets/websockets.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +61,7 @@
       <workItem from="1662266338059" duration="7003000" />
       <workItem from="1662318933662" duration="542000" />
       <workItem from="1662319491605" duration="2328000" />
-      <workItem from="1662324447942" duration="2758000" />
+      <workItem from="1662324447942" duration="5654000" />
     </task>
     <servers />
   </component>
