@@ -73,7 +73,7 @@ export class RutaArduinoComponent implements OnInit {
             },
             [
               Validators.required, // min, max, minLength maxLength, email, pattern
-              Validators.maxLength(13),
+              Validators.maxLength(19),
               Validators.pattern("[A-Za-z0-9]+"),
             ]
           )
