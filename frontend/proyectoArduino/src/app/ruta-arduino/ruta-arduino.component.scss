@@ -1,0 +1,98 @@
+#divWeatherMain {
+  margin: auto;
+  margin-top: 2%;
+  border-radius: 10px;
+  width: 200px;
+  height: 220px;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(8, 7, 42, 1) 75%, rgb(8, 10, 63) 100%);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+
+.weatherWidgetRow {
+  display: block;
+
+  margin-right: auto;
+  margin-left: auto;
+  width: fit-content;
+}
+
+.sun {
+  margin-top: 10px;
+  color: yellow;
+  filter: drop-shadow(1px 1px 10px yellow);
+}
+
+.moon {
+  margin-top: 10px;
+  color: white;
+  filter: drop-shadow(1px 1px 10px white);
+}
+
+.cloudDiv {
+  margin-top: -40px;
+}
+
+.cloud {
+  color: rgb(104, 175, 197);
+  filter: drop-shadow(1px 1px 5px rgb(104, 175, 197));
+  animation-name: cloudMovement;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+@keyframes cloudMovement {
+  from {
+    margin-left: -55px;
+  }
+  to {
+    margin-left: 65px;
+  }
+}
+
+h1 {
+  color: #50535A;
+  margin-bottom: 3%;
+  text-align: center;
+
+}
+
+
+.bonton-enviar {
+
+  background-color: #27272a;
+
+  border-color: #50535A;
+
+
+}
+
+
+.contenedor-formulario {
+
+  width: 90%;
+  margin-top: 3%;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
+
+@media (max-width: 767px) {
+
+  #contenedor {
+
+
+    width: 90%;
+
+    margin: auto;
+
+  }
+
+}
+
